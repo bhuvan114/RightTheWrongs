@@ -4,32 +4,31 @@ using System.Collections;
 public class GameControllerScript : MonoBehaviour {
 
 	public GameObject cameraHolder;
-	bool playerControls;
+	public CameraControllerScript cameraController;
 	GameObject playerObject;
+	float zoom;
 
 	// Use this for initialization
 	void Start () {
-	
-		playerControls = false;
+
 		playerObject = null;
+		zoom = 0f;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
-		if (Input.GetKeyDown (KeyCode.E)) {
-			playerControls = false;
-			Destroy (playerObject.GetComponent<Player3PController> ());
-		}
-
-		if (!playerControls) {
+		
+		if (cameraController.inGodsEyeView) {
+			zoom = 0f;
 			float moveHorizontal = Input.GetAxis ("Horizontal");
 			float moveVertical = Input.GetAxis ("Vertical");
-			Vector3 movement = new Vector3 (moveHorizontal, 0.0f, moveVertical);
+			if (Input.GetKey (KeyCode.Z))
+				zoom = -1f;
+			if (Input.GetKey (KeyCode.X))
+				zoom = 1f;
+			Vector3 movement = new Vector3 (moveHorizontal, zoom, moveVertical);
 
 			cameraHolder.transform.position = cameraHolder.transform.position + movement;
-		} else {
-			
 		}
 	}
 }

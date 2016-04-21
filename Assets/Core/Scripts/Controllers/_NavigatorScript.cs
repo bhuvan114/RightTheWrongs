@@ -51,9 +51,7 @@ public class _NavigatorScript : MonoBehaviour
 
     void OnAnimatorMove()
     {
-		//Debug.Log ("nav script : speed = " + animator.GetFloat("Speed") + ", player = " +  animator.ToString());
-		if(Time.deltaTime != 0)
-        	agent.velocity = animator.deltaPosition / Time.deltaTime;
+        agent.velocity = animator.deltaPosition / Time.deltaTime;
         transform.rotation = animator.rootRotation;
         // get a "forward vector" for each rotation
         var forwardA = transform.rotation * Vector3.forward;
@@ -76,9 +74,8 @@ public class _NavigatorScript : MonoBehaviour
 	}
 
 	// Update is called once per frame
-	void LateUpdate () 
+	void Update () 
 	{
-		//Debug.Log ("nav script : speed = " + animator.GetFloat("Speed") + ", player = " +  animator.ToString());
 		SetupAgentLocomotion();
 	}
 	

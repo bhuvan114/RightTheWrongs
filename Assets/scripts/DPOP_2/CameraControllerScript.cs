@@ -38,6 +38,7 @@ public class CameraControllerScript : MonoBehaviour {
 			if (inGodsEyeView) {
 				Debug.LogError ("Destroyin component!!");
 				Destroy (player.GetComponent<Player3PController> ());
+				//player.AddComponent (typeof(AudienceBehavior));
 			}
 		}
 		
@@ -51,9 +52,11 @@ public class CameraControllerScript : MonoBehaviour {
 				if (Physics.Raycast (ray, out hit, 1000)) {
 					if (hit.collider.gameObject.CompareTag ("PlayerControllable")) {
 						Debug.LogError (hit.collider.tag);
-						playerController = new Player3PController ();
+						//playerController = new Player3PController ();
 						player = hit.collider.gameObject.transform.parent.gameObject;
 						player.AddComponent (typeof(Player3PController));
+						//Destroy (player.GetComponent<AudienceBehavior> ());
+						player.GetComponent<AudienceBehavior> ().SetPlayerControl (true);
 						relCameraPos = this.transform.position - player.transform.position;
 						relCameraPosMag = relCameraPos.magnitude - 0.5f;
 						smoothPivotOffset = pivotOffset;

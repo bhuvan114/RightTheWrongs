@@ -41,6 +41,14 @@ public class BehaviorManager
         this.receivers.Add(receiver);
     }
 
+	public void Deregister(IBehaviorUpdate receiver)
+	{
+		if (this.receivers.Contains (receiver)) {
+			Debug.Log ("Deregistering");
+			this.receivers.Remove (receiver);
+		}
+	}
+
     /// <summary>
     /// Updates all events and agents for a behavior tick
     /// </summary>
@@ -48,9 +56,11 @@ public class BehaviorManager
     // every time we do a behavior update
     public void Update(float updateTime)
     {
-        for (int i = this.receivers.Count - 1; i >= 0; i--)
-            if (this.receivers[i].BehaviorUpdate(updateTime) != RunStatus.Running)
-                this.receivers.RemoveAt(i);
+		for (int i = this.receivers.Count - 1; i >= 0; i--)
+			if (this.receivers [i].BehaviorUpdate (updateTime) != RunStatus.Running) {
+				Debug.LogWarning ("Removing an agent");
+				this.receivers.RemoveAt (i);
+			}
     }
 
     /// <summary>

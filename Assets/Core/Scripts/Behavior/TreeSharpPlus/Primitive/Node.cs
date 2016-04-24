@@ -234,7 +234,9 @@ namespace TreeSharpPlus
         public virtual RunStatus Terminate()
         {
             // Nothing to do here, just start and succeed.
+			//Debug.LogError("In terminate");
             RunStatus curStatus = this.StartTermination();
+			//Debug.LogError("In terminate : " + curStatus.ToString());
             if (curStatus != RunStatus.Running)
                 return curStatus;
             return this.ReturnTermination(RunStatus.Success);

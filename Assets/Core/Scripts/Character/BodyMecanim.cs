@@ -212,6 +212,7 @@ public class BodyMecanim : MonoBehaviour
     /// </summary>
     public void HandAnimation(string gestureName, bool isActive)
     {
+		//Debug.LogError ("Hand animation - " + gestureName);
 
         if (isActive == true)
             this.ResetAnimation();
@@ -328,6 +329,9 @@ public class BodyMecanim : MonoBehaviour
             case "PISTOLAIM":
                 this.animator.SetBool("H_PistolAim", isActive);
                 break;
+            case "PISTOLFIRE":
+                this.animator.SetBool("H_PistolFire", isActive);
+                break;
             case "READ":
                 this.animator.SetBool("H_Read", isActive);
                 break;
@@ -349,6 +353,9 @@ public class BodyMecanim : MonoBehaviour
             case "WRITING":
                 this.animator.SetBool("H_Writing", isActive);
                 break;
+			case "GRAB":
+				this.animator.SetTrigger("H_Grab");
+				break;
         }
     }
 
@@ -421,6 +428,9 @@ public class BodyMecanim : MonoBehaviour
 
         this.animator.SetBool("FaceAnimation", false);
         this.animator.SetBool("HandAnimation", false);
+
+		this.resettingFaceLayerWeight = true;
+		this.resettingHandLayerWeight = true;
     }
     #endregion
 

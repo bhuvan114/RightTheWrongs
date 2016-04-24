@@ -23,15 +23,10 @@ public class UnitySteeringController : SteeringController
         }
         set
         {
-			//if (this.attached == true)
-			//	Debug.Log("ATTACHED!");
-			//else
-			//	Debug.Log("NOT ATTACHED!");
-			if (this.navAgent != null && this.attached == true)
+            if (this.navAgent != null && this.attached == true)
             {
                 this.navAgent.SetDestination(value);
                 this.target = value;
-				this.navAgent.Resume();
             }
         }
     }
@@ -141,7 +136,6 @@ public class UnitySteeringController : SteeringController
 
     protected void Attach()
     {
-		Debug.Log("ATTACHED!");
         this.navAgent.enabled = true;
         this.navAgent.radius = this.radius;
         this.navAgent.Move(this.cachedPosition - transform.position);

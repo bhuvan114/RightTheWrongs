@@ -45,10 +45,15 @@ public class Player3PController : MonoBehaviour {
 		*/
 	}
 
+	public void SetAnimController() {
+
+		anim = this.gameObject.GetComponent<Animator> ();
+	}
+
 	// Use this for initialization
 	void Start () {
 
-		anim = this.gameObject.GetComponent<Animator> ();
+		//anim = this.gameObject.GetComponent<Animator> ();
 		//Debug.Log ("animator = " + anim.ToString());
 	}
 	
@@ -60,7 +65,7 @@ public class Player3PController : MonoBehaviour {
 		float h = Input.GetAxis ("Horizontal");			
 		float v = Input.GetAxis ("Vertical");
 
-		if (!isPlayerBusy) {
+		//if (!isPlayerBusy) {
 			if (Input.GetKeyDown (KeyCode.Space)) {
 				anim.SetTrigger ("B_Jump");
 			}
@@ -84,7 +89,7 @@ public class Player3PController : MonoBehaviour {
 				}
 
 			//}
-		}
+		//}
 		//Debug.Log ("Speed = " + speed + " animator speed = " + anim.GetFloat("Speed"));
 	}
 

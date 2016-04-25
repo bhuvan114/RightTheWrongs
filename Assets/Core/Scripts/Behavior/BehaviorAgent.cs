@@ -134,8 +134,8 @@ public sealed class BehaviorAgent : BehaviorObject, IBehaviorUpdate
 			|| this.Status == BehaviorStatus.Restarting)
 		{
 			RunStatus result = this.TreeTerminate();
-			this.Status = BehaviorStatus.Idle;
-			return RunStatus.Success;
+			//this.Status = BehaviorStatus.Idle;
+			//return RunStatus.Success;
 			// TODO: Handle failure to terminate - AS
 			if (result != RunStatus.Running)
 			{

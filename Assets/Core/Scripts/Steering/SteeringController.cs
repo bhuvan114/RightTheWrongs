@@ -75,8 +75,10 @@ public abstract class SteeringController : MonoBehaviour
     public abstract bool IsAtTarget();
     public abstract bool IsStopped();
     public abstract bool HasArrived();
+	public abstract bool HasPath();
     public abstract bool CanReach(Vector3 target);
     public abstract void Stop();
+	public abstract void Resume();
     public abstract void Warp(Vector3 target);
 
     public bool IsFacing()

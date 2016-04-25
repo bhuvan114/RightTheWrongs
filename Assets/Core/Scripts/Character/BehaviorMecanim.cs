@@ -50,6 +50,12 @@ public class BehaviorMecanim : MonoBehaviour
             () => this.Character.NavStop());
     }
 
+	public Node Node_NavStop(){
+
+		return new LeafInvoke (
+			() => this.Character.NavStop ());
+	}
+
     //public Node Node_GoAlongPoints(Val<Vector3>[] targ)
     //{
     //    return new LeafInvoke(

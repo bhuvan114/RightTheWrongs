@@ -55,8 +55,10 @@ public class CameraControllerScript : MonoBehaviour {
 						//playerController = new Player3PController ();
 						player = hit.collider.gameObject.transform.parent.gameObject;
 						player.AddComponent (typeof(Player3PController));
+						player.GetComponent<Player3PController> ().SetAnimController ();
 						//Destroy (player.GetComponent<AudienceBehavior> ());
-						player.GetComponent<AudienceBehavior> ().SetPlayerControl (true);
+						if(player.GetComponent<AudienceBehavior> ())
+							player.GetComponent<AudienceBehavior> ().SetPlayerControl (true);
 						relCameraPos = this.transform.position - player.transform.position;
 						relCameraPosMag = relCameraPos.magnitude - 0.5f;
 						smoothPivotOffset = pivotOffset;

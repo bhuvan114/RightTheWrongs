@@ -492,6 +492,8 @@ public class BodyMecanim : MonoBehaviour
     /// </summary>
     public void NavGoTo(Vector3 target)
     {
+		if (this.steering.HasPath ())
+			this.steering.Resume ();
         this.Steering.Target = target;
     }
 

@@ -119,6 +119,11 @@ public class UnitySteeringController : SteeringController
         return this.IsAtTarget() && this.IsStopped();
     }
 
+	public override bool HasPath()
+	{
+		return this.navAgent.hasPath;
+	}
+
     public override bool CanReach(Vector3 target)
     {
         NavMeshPath path = new NavMeshPath();
@@ -174,6 +179,12 @@ public class UnitySteeringController : SteeringController
     {
         this.navAgent.Stop();
     }
+
+	public override void Resume()
+	{
+		this.navAgent.autoRepath = true;
+		this.navAgent.Resume ();
+	}
 
     public override void Warp(Vector3 target)
     {

@@ -21,9 +21,9 @@ public class AudienceBehavior : MonoBehaviour {
 			else {
 				Debug.Log ("null event");
 			}
-			/*root = dummy_tree ();
-			behaviorAgent = new BehaviorAgent (root);
-			BehaviorManager.Instance.Deregister (behaviorAgent);
+			/*root = dummy_tree ();*/
+			/*behaviorAgent = new BehaviorAgent (character.GetComponent<BehaviorMecanim> ().Node_NavStop ());
+			BehaviorManager.Instance.Register (behaviorAgent);
 			behaviorAgent.StartBehavior ();*/
 			behaviorAgent.StopBehavior ();
 		}
@@ -43,9 +43,9 @@ public class AudienceBehavior : MonoBehaviour {
 				Debug.Log (behaviorAgent.Status.ToString ());
 				//root = default_go_look ();
 				//behaviorAgent = new BehaviorAgent (root);
-				root = default_go_look ();
+				/*root = default_go_look ();
 				behaviorAgent = new BehaviorAgent (root);
-				BehaviorManager.Instance.Register (behaviorAgent);
+				BehaviorManager.Instance.Register (behaviorAgent);*/
 				behaviorAgent.StartBehavior ();
 			}
 			isPlayercontrolled = false;
@@ -73,8 +73,8 @@ public class AudienceBehavior : MonoBehaviour {
 			//if (behaviorAgent != null)
 			//	Debug.Log (behaviorAgent.Status.ToString ());
 		} else {
-			if(behaviorAgent != null)
-				Debug.Log (behaviorAgent.Status.ToString());
+			//if(behaviorAgent != null)
+				//Debug.Log (behaviorAgent.Status.ToString());
 		}
 	}
 
@@ -110,7 +110,7 @@ public class AudienceBehavior : MonoBehaviour {
 	protected Node dummy_tree1(){
 
 		return new LeafInvoke (
-			() => this.dummy_func ());
+			() => this.dummy_func1 ());
 	}
 
 	public void dummy_func1(){

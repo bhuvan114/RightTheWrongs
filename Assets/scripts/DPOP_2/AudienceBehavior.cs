@@ -16,11 +16,11 @@ public class AudienceBehavior : MonoBehaviour {
 
 		isPlayercontrolled = control;
 		if (isPlayercontrolled && behaviorAgent!= null) {
-			if (behaviorAgent.CurrentEvent != null)
-				Debug.Log (behaviorAgent.CurrentEvent.Name);
-			else {
-				Debug.Log ("null event");
-			}
+			//if (behaviorAgent.CurrentEvent != null)
+			//	Debug.Log (behaviorAgent.CurrentEvent.Name);
+			//else {
+			//	Debug.Log ("null event");
+			//}
 			/*root = dummy_tree ();*/
 			/*behaviorAgent = new BehaviorAgent (character.GetComponent<BehaviorMecanim> ().Node_NavStop ());
 			BehaviorManager.Instance.Register (behaviorAgent);
@@ -57,13 +57,13 @@ public class AudienceBehavior : MonoBehaviour {
 			//Default Audience Behavior
 			//if (behaviorAgent == null || behaviorAgent.Status != BehaviorStatus.Running) {
 			if (root == null) {
-				Debug.Log ("3");
+				//Debug.Log ("3");
 				root = default_go_look ();
 				behaviorAgent = new BehaviorAgent (root);
-				Debug.Log (behaviorAgent.ToString ());
+				//Debug.Log (behaviorAgent.ToString ());
 				BehaviorManager.Instance.Register (behaviorAgent);
 				behaviorAgent.StartBehavior ();
-				Debug.Log (BehaviorManager.Instance.ToString ());
+				//Debug.Log (BehaviorManager.Instance.ToString ());
 			} //else {
 			//Debug.Log (behaviorAgent.Status.ToString ());
 			//else if (!root.IsRunning) {
@@ -81,15 +81,15 @@ public class AudienceBehavior : MonoBehaviour {
 	protected Node default_go()
 	{
 		Val<Vector3> target = Val.V (() => position.position);
-		return new Sequence (character.GetComponent<BehaviorMecanim> ().Node_GoTo (target), this.dummy_tree());//, new LeafWait (1000));
+		return new Sequence (character.GetComponent<BehaviorMecanim> ().Node_GoTo (target));//, this.dummy_tree());//, new LeafWait (1000));
 	}
 
 	protected Node default_look()
 	{
 		Val<Vector3> target = Val.V (() => look.position);
 		return new Sequence (//character.GetComponent<BehaviorMecanim>().ST_TurnToFace(target),
-			character.GetComponent<BehaviorMecanim>().Node_OrientTowards(target), dummy_tree1(),
-								new LeafWait (1000));
+			character.GetComponent<BehaviorMecanim>().Node_OrientTowards(target), new LeafWait (1000));/* dummy_tree1(),*/
+								
 	}
 
 	protected Node default_go_look()

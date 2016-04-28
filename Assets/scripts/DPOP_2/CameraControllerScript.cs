@@ -34,10 +34,11 @@ public class CameraControllerScript : MonoBehaviour {
 	void Update () {
 	
 		if (Input.GetKeyDown (KeyCode.E)) {
-			inGodsEyeView = inGodsEyeView ? false : true;
-			if (inGodsEyeView) {
+			//inGodsEyeView = inGodsEyeView ? false : true;
+			if (!inGodsEyeView) {
 				Debug.LogError ("Destroyin component!!");
 				Destroy (player.GetComponent<Player3PController> ());
+				inGodsEyeView = true;
 				//player.AddComponent (typeof(AudienceBehavior));
 			}
 		}

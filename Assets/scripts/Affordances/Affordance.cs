@@ -118,7 +118,7 @@ namespace POPL.Planner
 			Debug.Log ("called for - " + name);
 			//foreach (Condition effect in effects)
 			//	NarrativeState.AddCondition (effect);
-			NarrativeStateManager.UpdateNarrativeState(this);
+			NSM.UpdateNarrativeState(this);
 		}
 
 		public bool CheckAffordancePreconditions() {

@@ -30,17 +30,21 @@ namespace POPL.Planner {
 		void InitiatePlan(){
 
 			//Debug.LogError ("Instantiate Plan!!");
-			//NarrativeStateManager.debugLog = "Initiating planner!!";
-			start = NarrativeStateManager.GetStartState ();
-			goal = NarrativeStateManager.GetGoalState ();
-			//NarrativeStateManager.GetGoalState ().disp ();
+			//NSM.debugLog = "Initiating planner!!";
+			//start = NSM.GetStartState ();
+			//goal = NSM.GetGoalState ();
+
+			start = NSM.GetStartState ();
+			goal = NSM.GetGoalState ();
+
+			//NSM.GetGoalState ().disp ();
 			if (agenda.Count () == 0)
 				AddActionToAgenda (goal);
-			NarrativeStateManager.affordances.Add (start);
-			if(!NarrativeStateManager.affordances.Contains(goal))
-				NarrativeStateManager.affordances.Add (goal);
+			NSM.affordances.Add (start);
+			if(!NSM.affordances.Contains(goal))
+				NSM.affordances.Add (goal);
 
-			foreach(Affordance act in NarrativeStateManager.affordances)
+			foreach(Affordance act in NSM.affordances)
 				if(!act.isStart())
 					AddToOrderingConstraints (start, act);
 			
@@ -48,18 +52,18 @@ namespace POPL.Planner {
 
 		void AddToOrderingConstraints(Affordance key, Affordance value) {
 
-			if (NarrativeStateManager.constraints.ContainsKey(key)){
-				if(!NarrativeStateManager.constraints[key].Contains(value))
-					NarrativeStateManager.constraints[key].Add(value);
+			if (NSM.constraints.ContainsKey(key)){
+				if(!NSM.constraints[key].Contains(value))
+					NSM.constraints[key].Add(value);
 			} else {
 				List<Affordance> listActions = new List<Affordance> ();
 				listActions.Add (value);
-				NarrativeStateManager.constraints.Add (key, listActions);
+				NSM.constraints.Add (key, listActions);
 			}
 		}
 
 		void AddActionToAgenda(Affordance act) {
-
+			
 			foreach (Condition p in act.getPreconditions()) {
 
 				agenda.Push(Tuple.New(p, act));
@@ -70,10 +74,10 @@ namespace POPL.Planner {
 
 			satAct = null;
 
-			foreach(Affordance act in NarrativeStateManager.affordances) {
+			foreach(Affordance act in NSM.affordances) {
 				List<Condition> actEffects = act.getEffects();
 				foreach(Condition effect in actEffects) {
-					if(effect.Equals(g.First) && !(NarrativeStateManager.constraints.ContainsKey(g.Second) && NarrativeStateManager.constraints[g.Second].Contains(act))) {
+					if(effect.Equals(g.First) && !(NSM.constraints.ContainsKey(g.Second) && NSM.constraints[g.Second].Contains(act))) {
 						satAct = act;
 						return true;
 					}
@@ -86,9 +90,8 @@ namespace POPL.Planner {
 
 			satAct = null;
 			//Debug.Log (Constants.affordanceRelations.Count ().ToString ());
-			//Debug.Log (g.First.condition + " " + g.First.status);
+			Debug.Log (g.First.condition + " " + g.First.status);
 			foreach (string affType in Constants.affordanceRelations[g.First.condition][g.First.status]) {
-				
 				foreach(Affordance act in Constants.possibleActionsMap[affType]) {
 					List<Condition> actEffects = act.getEffects();
 					foreach(Condition effect in actEffects) {
@@ -125,8 +128,8 @@ namespace POPL.Planner {
 					//Debug.Log("resolveConflicts : ");
 					//act.disp();
 					//cl.disp();
-					if ((NarrativeStateManager.constraints.ContainsKey (cl.act2) && NarrativeStateManager.constraints [cl.act2].Contains (act))
-					    || (NarrativeStateManager.constraints.ContainsKey (act) && NarrativeStateManager.constraints [act].Contains (cl.act1))) {
+					if ((NSM.constraints.ContainsKey (cl.act2) && NSM.constraints [cl.act2].Contains (act))
+					    || (NSM.constraints.ContainsKey (act) && NSM.constraints [act].Contains (cl.act1))) {
 						//continue;
 					} else {
 						//Debug.LogError ("Conflict - ");
@@ -165,10 +168,10 @@ namespace POPL.Planner {
 
 					//if (checkActionsForPrecondition(subG, out act)) {
 					if(CheckActionsForPrecondition(subG, out act)) {
-						NarrativeStateManager.affordances.Add(act);
+						NSM.affordances.Add(act);
 						AddToOrderingConstraints(start, act);
 						AddToOrderingConstraints(act, subG.Second);
-						foreach(CausalLink cl in NarrativeStateManager.causalLinks) {
+						foreach(CausalLink cl in NSM.causalLinks) {
 
 							ResolveConflicts(cl, act);
 						}
@@ -186,9 +189,9 @@ namespace POPL.Planner {
 					AddToOrderingConstraints(act, subG.Second);
 				}
 				CausalLink cLink = new CausalLink(act, subG.First, subG.Second);
-				NarrativeStateManager.causalLinks.Add(cLink);
+				NSM.causalLinks.Add(cLink);
 
-				foreach(Affordance a in NarrativeStateManager.affordances) {
+				foreach(Affordance a in NSM.affordances) {
 
 					if (!a.isStart())
 						ResolveConflicts(cLink, a);
@@ -203,10 +206,10 @@ namespace POPL.Planner {
 
 		public void ShowOrderingConstraints() {
 
-			foreach (Affordance key in NarrativeStateManager.constraints.Keys) {
+			foreach (Affordance key in NSM.constraints.Keys) {
 				Debug.LogWarning("Constraint : ");
 				key.disp();
-				List<Affordance> values = NarrativeStateManager.constraints[key];
+				List<Affordance> values = NSM.constraints[key];
 				Debug.Log("Happens before : ");
 				foreach(Affordance act in values)
 					act.disp();

@@ -32,7 +32,7 @@ public class GunTrigger : MonoBehaviour
 
 				Debug.LogWarning("Initiate draw gun");
 				gunController.SetIsDrawn (true);
-				drawGun = new DrawGun(playerController.GetComponent<SmartCharacter>(), this.GetComponent<SmartGun>());
+				//drawGun = new DrawGun(playerController.GetComponent<SmartCharacter>(), this.GetComponent<SmartGun>());
 				root = new Sequence(drawGun.execute(), drawGun.UpdateState());
 				behaviorAgent = new BehaviorAgent(root);
 				BehaviorManager.Instance.Register(behaviorAgent);

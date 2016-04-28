@@ -44,7 +44,7 @@ public class BehaviorManager
 	public void Deregister(IBehaviorUpdate receiver)
 	{
 		if (this.receivers.Contains (receiver)) {
-			Debug.Log ("Deregistering");
+			//Debug.Log ("Deregistering");
 			this.receivers.Remove (receiver);
 		}
 	}
@@ -58,7 +58,7 @@ public class BehaviorManager
     {
 		for (int i = this.receivers.Count - 1; i >= 0; i--)
 			if (this.receivers [i].BehaviorUpdate (updateTime) != RunStatus.Running) {
-				Debug.LogWarning ("Removing an agent");
+				//Debug.LogWarning ("Removing an agent");
 				this.receivers.RemoveAt (i);
 			}
     }

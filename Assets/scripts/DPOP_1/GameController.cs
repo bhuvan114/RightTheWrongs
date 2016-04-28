@@ -75,7 +75,7 @@ public class GameController : MonoBehaviour {
 					Cursor.visible = true;
 					Time.timeScale = 0f;
 					JournalPane.SetActive (true);
-					NarrativeStateManager.UpdateJournal ();
+					NSM.UpdateJournal ();
 				}
 			}
 		if (isPaused)

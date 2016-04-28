@@ -32,7 +32,7 @@ namespace POPL.Planner
 		}
 
 		public bool Equals(Condition c) {
-			
+
 			return ((actor1 == c.actor1) && (actor2 == c.actor2) && (condition == c.condition) && (status == c.status));
 		}
 		

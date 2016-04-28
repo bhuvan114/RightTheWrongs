@@ -9,6 +9,6 @@ public class SmartAgent : SmartObject {
 	public Meet meet;
 	public Apologize apologize;
 	public Argue argue;
-	public GoTo_Stage goToStage;
+	public Agent_GoTo_Stage goToStage;
 	public GoTo_Stage_Aim stageAim;
 }

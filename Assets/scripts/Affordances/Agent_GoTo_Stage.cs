@@ -4,11 +4,11 @@ using TreeSharpPlus;
 
 using POPL.Planner;
 
-public class GoTo_Stage : Affordance {
+public class Agent_GoTo_Stage : Affordance {
 
 	Vector3 pos;
 
-	public GoTo_Stage(SmartCharacter afdnt, SmartStage afdee){
+	public Agent_GoTo_Stage(SmartAgent afdnt, SmartStage afdee){
 
 		affodant = afdnt;
 		affordee = afdee;
@@ -25,7 +25,6 @@ public class GoTo_Stage : Affordance {
 		effects.Add (new Condition (affordantName, "OnStage", true));
 		effects.Add (new Condition (affordantName, "StageAim", false));
 		effects.Add (new Condition (affordantName, "InScene", false));
-		effects.Add (new Condition (affordeeName, "IsSecure", false));
 
 
 		treeRoot = this.execute ();

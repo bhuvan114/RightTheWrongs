@@ -37,6 +37,8 @@ public static class NSM {
 
 	public static string debugLog = "Yolo!!";
 
+	public static string playerControlledCharacter = "";
+	public static List<string> plannerControlledObjects = new List<string>();
 	public static string planTimes = "";
 	public static string planLengths = "";
 	public static string popTimes = "";
@@ -90,6 +92,19 @@ public static class NSM {
 			}
 		}
 		currentState.Add (cond);
+	}
+
+	public static void SetPlannerControledObjects(){
+
+		plannerControlledObjects = new List<string>();
+		foreach (Affordance aff in affordances) {
+
+			if (!plannerControlledObjects.Contains (aff.affodant.name))
+				plannerControlledObjects.Add (aff.affodant.name);
+
+			if (!plannerControlledObjects.Contains (aff.affordee.name))
+				plannerControlledObjects.Add (aff.affordee.name);
+		}
 	}
 
 	public static void InitiateNarrativeStateManager() {
@@ -153,6 +168,7 @@ public static class NSM {
 		planner = new DynamicPlanner ();
 		debugLog = "new planner!!";
 		if (planner.ComputePlan()) {
+			SetPlannerControledObjects ();
 			//Debug.LogError ("Goal Found");
 			ConstructBehaviourTree ();
 			hasPlan = true;
@@ -292,6 +308,7 @@ public static class NSM {
 			swatch.Start ();
 			if (planner.ComputePlan (inconsistencies)) {
 				swatch.Stop ();
+				SetPlannerControledObjects ();
 				planTimes = planTimes + "," + swatch.Elapsed.TotalMilliseconds.ToString ();
 				planLengths = planLengths + "," + affordances.Count ().ToString ();
 				ConstructBehaviourTree ();

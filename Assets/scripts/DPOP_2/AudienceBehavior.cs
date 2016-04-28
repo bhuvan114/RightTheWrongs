@@ -25,8 +25,14 @@ public class AudienceBehavior : MonoBehaviour {
 			/*behaviorAgent = new BehaviorAgent (character.GetComponent<BehaviorMecanim> ().Node_NavStop ());
 			BehaviorManager.Instance.Register (behaviorAgent);
 			behaviorAgent.StartBehavior ();*/
+			NSM.playerControlledCharacter = this.gameObject.GetComponent<SmartCharacter> ().name;
 			behaviorAgent.StopBehavior ();
 		}
+	}
+
+	public void SetPlannerControl(bool control){
+
+		//TODO: write shit
 	}
 
 	// Use this for initialization
@@ -41,6 +47,7 @@ public class AudienceBehavior : MonoBehaviour {
 		if (Input.GetKeyDown (KeyCode.E)) {
 			if (isPlayercontrolled && root != null) {
 				Debug.Log (behaviorAgent.Status.ToString ());
+				NSM.playerControlledCharacter = "";
 				//root = default_go_look ();
 				//behaviorAgent = new BehaviorAgent (root);
 				/*root = default_go_look ();

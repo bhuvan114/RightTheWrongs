@@ -93,11 +93,13 @@ namespace POPL.Planner {
 			Debug.Log (g.First.condition + " " + g.First.status);
 			foreach (string affType in Constants.affordanceRelations[g.First.condition][g.First.status]) {
 				foreach(Affordance act in Constants.possibleActionsMap[affType]) {
-					List<Condition> actEffects = act.getEffects();
-					foreach(Condition effect in actEffects) {
-						if(effect.Equals(g.First)) {
-							satAct = act;
-							return true;
+					if (!act.affodant.name.Equals (NSM.playerControlledCharacter) && !act.affordee.name.Equals (NSM.playerControlledCharacter)) {
+						List<Condition> actEffects = act.getEffects ();
+						foreach (Condition effect in actEffects) {
+							if (effect.Equals (g.First)) {
+								satAct = act;
+								return true;
+							}
 						}
 					}
 				}

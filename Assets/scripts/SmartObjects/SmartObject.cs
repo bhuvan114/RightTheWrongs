@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-
+using TreeSharpPlus;
 
 namespace POPL.Planner
 {
@@ -34,6 +34,18 @@ namespace POPL.Planner
 		public bool Equals(SmartObject obj) {
 
 			return name.Equals (obj.name);
+		}
+
+		public Node SetPlannerControl_BT(bool status){
+
+			return new LeafInvoke (
+				() => this.SetPlannerControl_BT (status));
+		}
+		
+		public void SetPlannerControl(bool status){
+
+			if (this.gameObject.GetComponent<AudienceBehavior> ())
+				this.gameObject.GetComponent<AudienceBehavior> ().SetPlannerControl (status);
 		}
 	}
 }

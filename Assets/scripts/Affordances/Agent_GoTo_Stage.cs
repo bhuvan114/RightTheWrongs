@@ -20,11 +20,14 @@ public class Agent_GoTo_Stage : Affordance {
 
 		base.initialize ();
 
+		name = "Agent goes to stage";
+
 		preconditions.Add(new Condition(affordantName, "InScene", true));
 
 		effects.Add (new Condition (affordantName, "OnStage", true));
 		effects.Add (new Condition (affordantName, "StageAim", false));
 		effects.Add (new Condition (affordantName, "InScene", false));
+		effects.Add (new Condition(affordeeName, "IsSecure", true));
 
 
 		treeRoot = this.execute ();

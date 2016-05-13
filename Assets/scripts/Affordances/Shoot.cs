@@ -31,7 +31,13 @@ public class Shoot : Affordance{
 
 		base.initialize ();
 
+		name = affordantName + " shoots " + affordeeName;
+
 		preconditions.Add (new Condition("Gun", "IsDrawn", true));
+		preconditions.Add (new Condition ("Stage", "IsSecure", false));
+		preconditions.Add (new Condition ("President", "PresAtExpo", true));
+
+		preconditions.Add (new Condition (affordantName, "ExpoAim", true));
 		//preconditions.Add (new Condition(affordeeName, "HasAmmo", true));
 
 		effects.Add(new Condition(affordeeName, "IsShot", true));

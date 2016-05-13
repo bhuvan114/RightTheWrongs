@@ -20,6 +20,8 @@ public class Leave_Stage : Affordance
 
 		base.initialize ();
 
+		name = affordantName + " leaves stage";
+
 		preconditions.Add(new Condition(affordantName, "InScene", false));
 		preconditions.Add (new Condition (affordantName, "OnStage", true));
 

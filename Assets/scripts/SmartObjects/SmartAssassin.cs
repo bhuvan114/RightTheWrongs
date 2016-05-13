@@ -6,6 +6,7 @@ using POPL.Planner;
 public class SmartAssassin : SmartObject {
 
 	public GoTo_Stage_Aim stageAim;
+	public GoTo_Expo_Aim expoAim;
 	public DrawGun drawGun;
 	public Shoot shoot;
 

@@ -106,7 +106,7 @@ namespace POPL.Planner
 			//Debug.Log ("called for - " + name);
 			//foreach (Condition effect in effects)
 			//	NarrativeState.AddCondition (effect);
-			NarrativeStateManager.UpdateNarrativeStateForUserAction(this);
+			NSM.UpdateNarrativeStateForUserAction(this);
 		}
 
 		public Node UpdateState() {

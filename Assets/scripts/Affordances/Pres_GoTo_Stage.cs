@@ -20,10 +20,15 @@ public class Pres_GoTo_Stage : Affordance {
 
 		base.initialize ();
 
+		name = "President goes to stage";
+
 		preconditions.Add(new Condition(affordantName, "InScene", true));
-		preconditions.Add(new Condition ("Agent", "OnStage", true));
+		//preconditions.Add(new Condition ("Agent", "OnStage", true));
+		preconditions.Add(new Condition (affordeeName, "IsSecure", true));
+		//preconditions.Add (new Condition("Assassin", "StageAttempt", true));
 
 		effects.Add (new Condition (affordantName, "PresOnStage", true));
+		effects.Add (new Condition (affordantName, "InScene", false));
 
 		treeRoot = this.execute ();
 	}

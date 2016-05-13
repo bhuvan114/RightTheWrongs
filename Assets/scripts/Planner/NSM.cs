@@ -85,6 +85,7 @@ public static class NSM {
 
 		for(int ind = 0; ind < currentState.Count; ind++) {
 			if(currentState[ind].isNegation(cond)) {
+				Debug.Log ("Negated!!");
 				currentState[ind] = cond;
 				return;
 			} else if (currentState[ind].Equals(cond)) {
@@ -149,14 +150,18 @@ public static class NSM {
 		AddConditionToNarrativeState(new Condition("Assassin", "HasGun", true));
 		AddConditionToNarrativeState(new Condition("Assassin", "Undetected", false));
 		AddConditionToNarrativeState(new Condition("Gun", "IsDrawn", false));
+		AddConditionToNarrativeState(new Condition ("Stage", "IsSecure", false));
 
 		SetStartState ();
 
 		goal = new Affordance ();
 		goal.setGoal ();
 		//goal.addPrecondition (new Condition("Assasin", "Gun", "IsDrawn", true));
-		goal.addPrecondition (new Condition("President", "PresOnStage", true));
-		goal.addPrecondition (new Condition("Assassin", "StageAim", true));
+		//goal.addPrecondition (new Condition("President", "NearMic", true));
+
+		//goal.addPrecondition (new Condition("Assassin", "ExpoAim", true));
+		goal.addPrecondition (new Condition("Assassin", "StageAttempt", true));
+		//goal.addPrecondition (new Condition("President", "PresAtExpo", true));
 		goal.addPrecondition (new Condition("President", "IsShot", true));
 		isPlanning = true;
 		hasPlan = false;
@@ -299,10 +304,10 @@ public static class NSM {
 			ResetStartState ();
 			System.Diagnostics.Stopwatch swatch = new System.Diagnostics.Stopwatch ();
 			swatch.Start ();
-			pop.computePlan();
+			//pop.computePlan();
 			swatch.Stop ();
-			popLengths = popLengths + "," + pop.getNoOfActions ().ToString ();
-			popTimes = popTimes + "," + swatch.Elapsed.TotalMilliseconds.ToString ();
+			//popLengths = popLengths + "," + pop.getNoOfActions ().ToString ();
+			//popTimes = popTimes + "," + swatch.Elapsed.TotalMilliseconds.ToString ();
 
 			swatch = new System.Diagnostics.Stopwatch ();
 			swatch.Start ();
@@ -329,8 +334,11 @@ public static class NSM {
 	public static void UpdateNarrativeState(Affordance action) {
 
 		//Add effects to Narrative State
-		foreach (Condition effect in action.getEffects())
+		Debug.LogError("Bleh --------------");
+		foreach (Condition effect in action.getEffects()) {
+			effect.disp ();
 			AddConditionToNarrativeState (effect);
+		}
 
 		//if (affordances.Contains (action))
 		Debug.LogError ("Removing action");
@@ -357,6 +365,7 @@ public static class NSM {
 			aff.disp ();
 
 		planner.ShowOrderingConstraints ();
+		planner.ShowCausalLinks ();
 
 		Dictionary<Affordance, int> affOrder = new Dictionary<Affordance, int> ();
 		int indx = affordances.Count;

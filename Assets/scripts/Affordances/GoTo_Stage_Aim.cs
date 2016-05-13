@@ -36,11 +36,16 @@ public class GoTo_Stage_Aim : Affordance {
 
 		base.initialize ();
 
+		name = affordantName + " moves near stage";
+
 		preconditions.Add(new Condition(affordantName, "InScene", true));
+		//preconditions.Add (new Condition("President", "PresOnStage", true));
 
 		effects.Add (new Condition (affordantName, "OnStage", false));
 		effects.Add (new Condition (affordantName, "StageAim", true));
 		effects.Add (new Condition (affordantName, "Undetected", true));
+		effects.Add (new Condition (affordantName, "StageAttempt", true));
+
 		treeRoot = this.execute ();
 	}
 

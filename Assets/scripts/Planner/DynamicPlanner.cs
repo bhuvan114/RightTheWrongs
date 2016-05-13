@@ -218,6 +218,14 @@ namespace POPL.Planner {
 			}
 		}
 
+		public void ShowCausalLinks(){
+
+			foreach (CausalLink cl in NSM.causalLinks) {
+				Debug.LogWarning ("cl -- ");
+				cl.disp ();
+			}
+		}
+
 		public DynamicPlanner () { }
 
 	}

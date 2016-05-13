@@ -20,6 +20,8 @@ public class GoTo_Stage : Affordance {
 
 		base.initialize ();
 
+		name = affordantName + " moves to stage";
+
 		preconditions.Add(new Condition(affordantName, "InScene", true));
 
 		effects.Add (new Condition (affordantName, "OnStage", true));

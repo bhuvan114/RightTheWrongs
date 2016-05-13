@@ -11,7 +11,7 @@ public class SmartCharacter : SmartObject {
 	public Argue argue;
 	//public DrawGun drawGun;
 	public GoTo_Stage goToStage;
-	public Leave_Stage leaveStage;
+	//public Leave_Stage leaveStage;
 	public GoTo_Stage_Aim stageAim;
 	public GameObject hipHolder;
 	public GameObject handHolder;

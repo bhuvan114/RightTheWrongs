@@ -19,8 +19,11 @@ public class DrawGun : Affordance {
 		
 		base.initialize ();
 
+		name = affordantName + " draws " + affordeeName;
+
 		preconditions.Add (new Condition(affordantName, "HasGun", true));
 		preconditions.Add (new Condition(affordantName, "Undetected", true));
+		//preconditions.Add (new Condition("President", "IsSpeaking", true));
 		preconditions.Add(new Condition(affordeeName, "IsDrawn", false));
 
 		effects.Add(new Condition(affordeeName, "IsDrawn", true));

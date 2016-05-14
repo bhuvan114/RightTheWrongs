@@ -66,6 +66,15 @@ public static class NSM {
 
 	public static Node root = null;
 
+
+	public static bool IsConditionInCurrentState(Condition cond){
+
+		if (currentState.Contains (cond))
+			return true;
+
+		return false;
+	}
+
 	static void SetStartState() {
 
 		start = new Affordance();
@@ -162,7 +171,9 @@ public static class NSM {
 		//goal.addPrecondition (new Condition("Assassin", "ExpoAim", true));
 		goal.addPrecondition (new Condition("Assassin", "StageAttempt", true));
 		//goal.addPrecondition (new Condition("President", "PresAtExpo", true));
-		goal.addPrecondition (new Condition("President", "IsShot", true));
+		//goal.addPrecondition (new Condition("President", "IsShot", true));
+		//goal.addPrecondition (new Condition("Doctor", "NearPresident", true));
+		goal.addPrecondition (new Condition("President", "IsDead", true));
 		isPlanning = true;
 		hasPlan = false;
 		//List<POPL.Planner.Tuple<Condition, Affordance>> inconsistencies = new List<POPL.Planner.Tuple<Condition, Affordance>> ();
@@ -277,7 +288,7 @@ public static class NSM {
 	public static void UpdateNarrativeStateForUserAction(Affordance action) {
 
 		Time.timeScale = 0f;
-		Node tempRoot = root;
+		//Node tempRoot = root;
 		Debug.LogError ("UpdateNarrativeStateForUserAction!!");
 		//Add effects to Narrative State
 		foreach (Condition effect in action.getEffects())
@@ -325,7 +336,7 @@ public static class NSM {
 			}
 			isPlanning = false;
 		} else {
-			root = tempRoot;
+			//root = tempRoot;
 		}
 		Debug.LogWarning ("UpdateNarrativeStateForUserAction - Done!!");
 		Time.timeScale = 1f;

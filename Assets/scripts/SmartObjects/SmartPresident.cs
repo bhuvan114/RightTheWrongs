@@ -12,7 +12,7 @@ public class SmartPresident : SmartObject {
 	public Pres_GoTo_Stage goToStage;
 	public Pres_GoTo_Mic goToMic;
 	public Pres_GoToExpo goToExpo;
-	public Pres_Leave_Stage leaveStage;
+	//public Pres_Leave_Stage leaveStage;
 	public StartSpeech startSpeech;
 	public EndSpeech endSpeech;
 }

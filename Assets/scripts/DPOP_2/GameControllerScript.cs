@@ -70,7 +70,9 @@ public class GameControllerScript : MonoBehaviour {
 			//if (behaviorAgent != null)
 			//	Debug.Log(behaviorAgent.Status.ToString());
 			if (NSM.hasPlan == true && !NSM.root.IsRunning) {
-
+				Debug.LogError ("BT Updated!!");
+				//BehaviorManager.Instance.ClearReceivers ();
+				BehaviorManager.Instance.Deregister(behaviorAgent);
 				NSM.root = new Sequence (NSM.root, this.TeriminatePlan ());
 				behaviorAgent = new BehaviorAgent (NSM.root);
 				BehaviorManager.Instance.Register (behaviorAgent);

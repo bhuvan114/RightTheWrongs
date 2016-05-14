@@ -22,4 +22,10 @@ public class MenuScript : MonoBehaviour {
 		*/
 		Application.OpenURL (uri);
 	}
+
+	public void GoToNextScene() {
+
+		string uri = "https://dl.dropboxusercontent.com/s/cci976irya4p4qb/Dynamic%20Narratives.html";
+		Application.OpenURL (uri);
+	}
 }

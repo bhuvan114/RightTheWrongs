@@ -28,6 +28,7 @@ public class Pres_Leave_Stage : Affordance {
 		effects.Add (new Condition (affordantName, "PresOnStage", false));
 		effects.Add (new Condition (affordantName, "InScene", true));
 		effects.Add (new Condition (affordeeName, "IsSecure", false));
+		effects.Add (new Condition (affordantName, "SpeechGiven", true));
 
 		treeRoot = this.execute ();
 	}

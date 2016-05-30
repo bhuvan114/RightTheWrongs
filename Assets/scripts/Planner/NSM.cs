@@ -181,14 +181,28 @@ public static class NSM {
 		//	inconsistencies.Add (new POPL.Planner.Tuple<Condition, Affordance> (cond, goal));
 
 
+		System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch ();
+		watch.Start ();
+		pop.computePlan();
+		watch.Stop ();
+
 		planner = new DynamicPlanner ();
 		debugLog = "new planner!!";
-		if (planner.ComputePlan()) {
+
+		//Recording plan times
+		System.Diagnostics.Stopwatch swatch = new System.Diagnostics.Stopwatch ();
+		swatch.Start ();
+		if (planner.ComputePlan ()) {
+			swatch.Stop ();
 			SetPlannerControledObjects ();
 			//Debug.LogError ("Goal Found");
 			ConstructBehaviourTree ();
 			hasPlan = true;
+		} else {
+			swatch.Stop ();
 		}
+		Debug.LogError ("Aniki iPlan : " + watch.Elapsed.TotalMilliseconds.ToString () + "-" + swatch.Elapsed.TotalMilliseconds.ToString () + "-" + pop.getNoOfActions ().ToString () + "-" + affordances.Count ().ToString ());
+		planTimes = planTimes + "," + swatch.Elapsed.TotalMilliseconds.ToString ();
 		isPlanning = false;
 	}
 
@@ -313,17 +327,18 @@ public static class NSM {
 			runningCLs = new List<CausalLink> ();
 			//SetStartState ();
 			ResetStartState ();
-			System.Diagnostics.Stopwatch swatch = new System.Diagnostics.Stopwatch ();
-			swatch.Start ();
-			//pop.computePlan();
-			swatch.Stop ();
+			System.Diagnostics.Stopwatch watch = new System.Diagnostics.Stopwatch ();
+			watch.Start ();
+			pop.computePlan();
+			watch.Stop ();
 			//popLengths = popLengths + "," + pop.getNoOfActions ().ToString ();
 			//popTimes = popTimes + "," + swatch.Elapsed.TotalMilliseconds.ToString ();
-
-			swatch = new System.Diagnostics.Stopwatch ();
+			int success = 0;
+			System.Diagnostics.Stopwatch swatch = new System.Diagnostics.Stopwatch ();
 			swatch.Start ();
 			if (planner.ComputePlan (inconsistencies)) {
 				swatch.Stop ();
+				success = 1;
 				SetPlannerControledObjects ();
 				planTimes = planTimes + "," + swatch.Elapsed.TotalMilliseconds.ToString ();
 				planLengths = planLengths + "," + affordances.Count ().ToString ();
@@ -335,6 +350,8 @@ public static class NSM {
 				planLengths = planLengths + "," + "0";
 			}
 			isPlanning = false;
+			Debug.LogError ("Aniki replan_"+ success+" : " + watch.Elapsed.TotalMilliseconds.ToString () + "-" + swatch.Elapsed.TotalMilliseconds.ToString () + "-" + pop.getNoOfActions ().ToString () + "-" + affordances.Count ().ToString ());
+
 		} else {
 			//root = tempRoot;
 		}

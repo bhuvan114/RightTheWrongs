@@ -55,12 +55,14 @@ public class DataCollection : MonoBehaviour
         WWWForm form = new WWWForm();
         //form.AddField("actions", actions.ToString());
         //form.AddField("time", timer.ToString());
-		form.AddField ("noOfPossibleActions", NarrativeStateManager.noOfPossibleActions);
-		form.AddField ("popTimes", NarrativeStateManager.popTimes);
-		form.AddField ("popLengths", NarrativeStateManager.popLengths);
-		form.AddField ("D_planTimes", NarrativeStateManager.planTimes);
-		form.AddField ("D_planLengths", NarrativeStateManager.planLengths);
-        WWW survey_info = new WWW(post_url, form);
+
+		//form.AddField ("noOfPossibleActions", NarrativeStateManager.noOfPossibleActions);
+		//form.AddField ("popTimes", NarrativeStateManager.popTimes);
+		//form.AddField ("popLengths", NarrativeStateManager.popLengths);
+		form.AddField ("D_planTimes", NSM.planTimes);
+		//form.AddField ("D_planLengths", NarrativeStateManager.planLengths);
+        
+		WWW survey_info = new WWW(post_url, form);
 
         // Wait for the request to send
         yield return survey_info;

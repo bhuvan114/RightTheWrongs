@@ -11,6 +11,8 @@ public class GameControllerScript : MonoBehaviour {
 	public GameObject JournalPane;
 	public GameObject PausePane;
 
+	public DataCollection userMetrics;
+
 	public GameObject cameraHolder;
 	public CameraControllerScript cameraController;
 	GameObject playerObject;
@@ -60,6 +62,7 @@ public class GameControllerScript : MonoBehaviour {
 			}
 			if (NSM.hasPlan == false && NSM.isPlanning == false) {
 				Debug.LogWarning ("Planner Failed!!");
+				userMetrics.publishData();
 				ObjectiveUIPanel.SetActive (true);
 				Cursor.visible = true;
 				Cursor.lockState = CursorLockMode.None;
@@ -125,7 +128,8 @@ public class GameControllerScript : MonoBehaviour {
 	}	
 
 	public void TerimateNarrative() {
-		//userMetrics.publishData();
+		Debug.LogWarning ("Debug log called : " + NSM.planTimes);
+		userMetrics.publishData();
 		objectiveFailure.SetActive (true);
 		Cursor.visible = true;
 		Cursor.lockState = CursorLockMode.None;

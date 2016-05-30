@@ -18,19 +18,21 @@ namespace POPL.Planner
 		void instantiatePlan() {
 
 			actions = new List<Affordance>();
-			start = NarrativeStateManager.GetStartState ();
-			goal = NarrativeStateManager.GetGoalState ();
+			start = NSM.GetStartState ();
+			goal = NSM.GetGoalState ();
 			addToOrderingConstraints (start, goal);
 			actions.Add (start);
 			actions.Add (goal);
 			addActionToAgenda (goal);
 			allPossibleActions = Constants.allPossibleAffordances;
-			NarrativeStateManager.noOfPossibleActions = allPossibleActions.Count ();
+			NSM.noOfPossibleActions = allPossibleActions.Count ();
 
 		}
 
 		void addToOrderingConstraints(Affordance key, Affordance value) {
-			
+
+			key.disp ();
+
 			if (orderingConsts.ContainsKey(key)){
 				if(!orderingConsts[key].Contains(value))
 					orderingConsts[key].Add(value);
